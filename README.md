@@ -8,6 +8,7 @@ A monorepo hosting multiple [MCP (Model Context Protocol)](https://modelcontextp
 |---------|--------|-------------|----------|
 | **brave-search** | [@modelcontextprotocol/server-brave-search](https://www.npmjs.com/package/@modelcontextprotocol/server-brave-search) | Web search via Brave Search API | `https://<service>.railway.app/mcp` |
 | **grubhub** | [aserper/grubhub-mcp](https://github.com/aserper/grubhub-mcp) | Search restaurants, browse menus, manage cart, place orders | `https://<service>.railway.app/mcp` |
+| **puppeteer** | [@modelcontextprotocol/server-puppeteer](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) | Browser automation using headless Chromium | `https://<service>.railway.app/mcp` |
 
 ## Architecture
 
@@ -23,7 +24,8 @@ Each service is a Docker container that:
 │  Supergateway (HTTP :$PORT)                 │
 │       │                                     │
 │       └── stdio ──▶ MCP Server              │
-│                     (brave-search / grubhub) │
+│                     (brave-search/grubhub/  │
+│                      puppeteer)             │
 │                                             │
 │  Endpoint: https://svc.railway.app/mcp      │
 └─────────────────────────────────────────────┘
@@ -46,14 +48,16 @@ cp .env.example .env
 |---------|----------|----------|-------------|
 | brave-search | `BRAVE_API_KEY` | ✅ | Get from [brave.com/developers](https://search.brave.com/developers) |
 | grubhub | *(none)* | — | Search/browse works without auth |
+| puppeteer | *(none)* | — | Runs headless Chromium out-of-the-box |
 
 ### 3. Deploy to Railway
 
 1. Create a new project on [Railway](https://railway.app)
 2. Connect this GitHub repo
-3. Add **two services**, each pointing to its subdirectory:
+3. Add services pointing to their subdirectories:
    - `brave-search/` → service name: `brave-search`
    - `grubhub/` → service name: `grubhub`
+   - `puppeteer/` → service name: `puppeteer`
 4. Set environment variables on each service
 5. Railway auto-detects the Dockerfile and deploys
 
@@ -65,10 +69,13 @@ Use the Railway-assigned URLs in your MCP client config:
 {
   "mcpServers": {
     "brave-search": {
-      "url": "https://brave-search-production-XXXX.up.railway.app/mcp"
+      "url": "https://brave-search-production-610d.up.railway.app/mcp"
     },
     "grubhub": {
-      "url": "https://grubhub-production-XXXX.up.railway.app/mcp"
+      "url": "https://grubhub-production.up.railway.app/mcp"
+    },
+    "puppeteer": {
+      "url": "https://puppeteer-production.up.railway.app/mcp"
     }
   }
 }
