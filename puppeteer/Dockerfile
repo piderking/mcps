@@ -20,5 +20,5 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway wraps stdio MCP server and exposes Streamable HTTP endpoint
-CMD ["supergateway", "--port", "8080", "--stdio", "mcp-server-puppeteer"]
+# Supergateway wraps stdio MCP server and exposes Streamable HTTP endpoint at /mcp
+CMD supergateway --port ${PORT} --outputTransport streamableHttp --stdio "mcp-server-puppeteer"
