@@ -69,13 +69,13 @@ Use the Railway-assigned URLs in your MCP client config:
 {
   "mcpServers": {
     "brave-search": {
-      "url": "https://brave-search-production-610d.up.railway.app/mcp"
+      "url": "https://brave-search-production-e850.up.railway.app/mcp"
     },
     "grubhub": {
       "url": "https://grubhub-production.up.railway.app/mcp"
     },
     "puppeteer": {
-      "url": "https://puppeteer-production.up.railway.app/mcp"
+      "url": "https://puppeteer-production-88ab.up.railway.app/mcp"
     }
   }
 }
