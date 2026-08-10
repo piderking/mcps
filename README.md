@@ -47,7 +47,8 @@ cp .env.example .env
 | Service | Variable | Required | Description |
 |---------|----------|----------|-------------|
 | brave-search | `BRAVE_API_KEY` | ✅ | Get from [brave.com/developers](https://search.brave.com/developers) |
-| grubhub | *(none)* | — | Search/browse works without auth |
+| grubhub | `GRUBHUB_EMAIL` | ⚠️ | Required for account access, cart & ordering |
+| grubhub | `GRUBHUB_PASSWORD` | ⚠️ | Required for account access, cart & ordering |
 | puppeteer | *(none)* | — | Runs headless Chromium out-of-the-box |
 
 ### 3. Deploy to Railway
