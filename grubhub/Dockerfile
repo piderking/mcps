@@ -18,5 +18,5 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway wraps the stdio-based grubhub MCP with CORS and exposes Streamable HTTP at /mcp
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "grubhub"
+# Supergateway wraps stdio MCP with CORS over SSE transport at /sse
+CMD supergateway --port ${PORT} --cors --stdio "grubhub"

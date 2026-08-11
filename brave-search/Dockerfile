@@ -8,5 +8,5 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway wraps the stdio-based MCP server with CORS and exposes Streamable HTTP at /mcp
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "npx @modelcontextprotocol/server-brave-search"
+# Supergateway wraps stdio MCP with CORS over SSE transport at /sse
+CMD supergateway --port ${PORT} --cors --stdio "npx @modelcontextprotocol/server-brave-search"

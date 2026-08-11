@@ -8,5 +8,5 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway wraps stdio MCP server with CORS and exposes Streamable HTTP endpoint at /mcp
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "mcp-server-google-maps"
+# Supergateway wraps stdio MCP with CORS over SSE transport at /sse
+CMD supergateway --port ${PORT} --cors --stdio "mcp-server-google-maps"
