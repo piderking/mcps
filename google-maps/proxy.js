@@ -12,10 +12,11 @@ const sg = spawn('npx', [
   '--port', String(SG_PORT),
   '--cors',
   '--outputTransport', 'streamableHttp',
-  '--stdio', `${command}`
+  '--stdio', command
 ], {
   stdio: 'inherit',
-  shell: true
+  shell: true,
+  env: { ...process.env, PORT: String(SG_PORT) }
 });
 
 sg.on('exit', (code) => {
