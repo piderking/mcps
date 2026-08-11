@@ -38,5 +38,5 @@ COPY server.py .
 ENV PORT=8080
 EXPOSE ${PORT}
 
-# Supergateway wraps stdio MCP server and exposes Streamable HTTP endpoint at /mcp
-CMD supergateway --port ${PORT} --outputTransport streamableHttp --stdio "python3 server.py"
+# Supergateway wraps stdio MCP server with CORS and exposes Streamable HTTP endpoint at /mcp
+CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "python3 server.py"
