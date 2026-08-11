@@ -5,13 +5,20 @@ const PORT = process.env.PORT || 8080;
 const SG_PORT = 8081;
 
 const command = process.argv.slice(2).join(' ');
-console.log(`Starting Supergateway on internal port ${SG_PORT}...`);
+console.log(`Proxy starting on port ${PORT} -> Supergateway on internal port ${SG_PORT}...`);
 
-const cmdStr = `PORT=${SG_PORT} npx -y supergateway --port ${SG_PORT} --cors --outputTransport streamableHttp --stdio "${command}"`;
+delete process.env.PORT;
+const childEnv = { ...process.env, PORT: String(SG_PORT) };
 
-const sg = spawn(cmdStr, {
+const sg = spawn('npx', [
+  '-y', 'supergateway',
+  '--port', String(SG_PORT),
+  '--cors',
+  '--outputTransport', 'streamableHttp',
+  '--stdio', command
+], {
   stdio: 'inherit',
-  shell: true
+  env: childEnv
 });
 
 sg.on('exit', (code) => {
