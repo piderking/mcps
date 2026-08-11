@@ -18,5 +18,5 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway wraps stdio MCP with CORS over SSE transport at /sse
-CMD supergateway --port ${PORT} --cors --stdio "grubhub"
+# Supergateway exposes Streamable HTTP with CORS at /mcp for Google Spark
+CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "grubhub"

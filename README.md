@@ -77,19 +77,19 @@ Use the Railway-assigned URLs in your MCP client config:
 {
   "mcpServers": {
     "brave-search": {
-      "url": "https://brave-search-production-e850.up.railway.app/sse"
+      "url": "https://brave-search-production-e850.up.railway.app/mcp"
     },
     "crawl4ai": {
-      "url": "https://crawl4ai-production-64f5.up.railway.app/sse"
+      "url": "https://crawl4ai-production-64f5.up.railway.app/mcp"
     },
     "google-maps": {
-      "url": "https://google-maps-production-4cff.up.railway.app/sse"
+      "url": "https://google-maps-production-4cff.up.railway.app/mcp"
     },
     "grubhub": {
-      "url": "https://grubhub-production.up.railway.app/sse"
+      "url": "https://grubhub-production.up.railway.app/mcp"
     },
     "puppeteer": {
-      "url": "https://puppeteer-production-88ab.up.railway.app/sse"
+      "url": "https://puppeteer-production-88ab.up.railway.app/mcp"
     }
   }
 }

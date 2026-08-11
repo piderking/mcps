@@ -28,8 +28,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
 # Install supergateway globally
 RUN npm install -g supergateway
 
-# Install crawl4ai, mcp, and playwright
-RUN pip install --no-cache-dir crawl4ai mcp playwright && \
+# Install crawl4ai, mcp, fastmcp, and playwright
+RUN pip install --no-cache-dir "mcp>=1.2.0" "fastmcp>=0.1.0" crawl4ai playwright && \
     playwright install --with-deps chromium || playwright install chromium
 
 WORKDIR /app
@@ -38,5 +38,5 @@ COPY server.py .
 ENV PORT=8080
 EXPOSE ${PORT}
 
-# Supergateway wraps stdio MCP with CORS over SSE transport at /sse
-CMD supergateway --port ${PORT} --cors --stdio "python3 server.py"
+# Supergateway exposes Streamable HTTP with CORS at /mcp for Google Spark
+CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "python3 server.py"
