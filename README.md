@@ -83,7 +83,7 @@ Use the Railway-assigned URLs in your MCP client config:
       "url": "https://firecrawl-production-96b2.up.railway.app/mcp"
     },
     "google-maps": {
-      "url": "https://google-maps-production.up.railway.app/mcp"
+      "url": "https://google-maps-production-4cff.up.railway.app/mcp"
     },
     "grubhub": {
       "url": "https://grubhub-production.up.railway.app/mcp"
