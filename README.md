@@ -7,6 +7,7 @@ A monorepo hosting multiple [MCP (Model Context Protocol)](https://modelcontextp
 | Service | Source | Description | Endpoint |
 |---------|--------|-------------|----------|
 | **brave-search** | [@modelcontextprotocol/server-brave-search](https://www.npmjs.com/package/@modelcontextprotocol/server-brave-search) | Web search via Brave Search API | `https://<service>.railway.app/mcp` |
+| **firecrawl** | [firecrawl-mcp](https://www.npmjs.com/package/firecrawl-mcp) | Web scraping, crawling, and content extraction via Firecrawl | `https://<service>.railway.app/mcp` |
 | **grubhub** | [aserper/grubhub-mcp](https://github.com/aserper/grubhub-mcp) | Search restaurants, browse menus, manage cart, place orders | `https://<service>.railway.app/mcp` |
 | **puppeteer** | [@modelcontextprotocol/server-puppeteer](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) | Browser automation using headless Chromium | `https://<service>.railway.app/mcp` |
 
@@ -24,8 +25,8 @@ Each service is a Docker container that:
 │  Supergateway (HTTP :$PORT)                 │
 │       │                                     │
 │       └── stdio ──▶ MCP Server              │
-│                     (brave-search/grubhub/  │
-│                      puppeteer)             │
+│                     (brave-search/firecrawl/│
+│                      grubhub/puppeteer)     │
 │                                             │
 │  Endpoint: https://svc.railway.app/mcp      │
 └─────────────────────────────────────────────┘
@@ -47,6 +48,7 @@ cp .env.example .env
 | Service | Variable | Required | Description |
 |---------|----------|----------|-------------|
 | brave-search | `BRAVE_API_KEY` | ✅ | Get from [brave.com/developers](https://search.brave.com/developers) |
+| firecrawl | `FIRECRAWL_API_KEY` | ✅ | Get from [firecrawl.dev](https://firecrawl.dev) |
 | grubhub | `GRUBHUB_EMAIL` | ⚠️ | Required for account access, cart & ordering |
 | grubhub | `GRUBHUB_PASSWORD` | ⚠️ | Required for account access, cart & ordering |
 | puppeteer | *(none)* | — | Runs headless Chromium out-of-the-box |
@@ -57,6 +59,7 @@ cp .env.example .env
 2. Connect this GitHub repo
 3. Add services pointing to their subdirectories:
    - `brave-search/` → service name: `brave-search`
+   - `firecrawl/` → service name: `firecrawl`
    - `grubhub/` → service name: `grubhub`
    - `puppeteer/` → service name: `puppeteer`
 4. Set environment variables on each service
@@ -71,6 +74,9 @@ Use the Railway-assigned URLs in your MCP client config:
   "mcpServers": {
     "brave-search": {
       "url": "https://brave-search-production-e850.up.railway.app/mcp"
+    },
+    "firecrawl": {
+      "url": "https://firecrawl-production.up.railway.app/mcp"
     },
     "grubhub": {
       "url": "https://grubhub-production.up.railway.app/mcp"
