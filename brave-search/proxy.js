@@ -1,24 +1,24 @@
 import http from 'node:http';
 import { spawn } from 'node:child_process';
 
-const PORT = process.env.PORT || 8080;
-const SG_PORT = 8081;
+const PUBLIC_PORT = parseInt(process.env.PORT || '8080');
+const INTERNAL_PORT = 8081;
+
+process.env.PORT = String(INTERNAL_PORT);
 
 const command = process.argv.slice(2).join(' ');
-console.log(`Proxy starting on port ${PORT} -> Supergateway on internal port ${SG_PORT}...`);
-
-delete process.env.PORT;
-const childEnv = { ...process.env, PORT: String(SG_PORT) };
+console.log(`Starting Proxy on port ${PUBLIC_PORT} -> Supergateway on internal port ${INTERNAL_PORT}...`);
 
 const sg = spawn('npx', [
   '-y', 'supergateway',
-  '--port', String(SG_PORT),
+  '--port', String(INTERNAL_PORT),
   '--cors',
   '--outputTransport', 'streamableHttp',
   '--stdio', command
 ], {
   stdio: 'inherit',
-  env: childEnv
+  shell: true,
+  env: process.env
 });
 
 sg.on('exit', (code) => {
@@ -38,7 +38,7 @@ const server = http.createServer((req, res) => {
 
   const options = {
     hostname: '127.0.0.1',
-    port: SG_PORT,
+    port: INTERNAL_PORT,
     path: req.url,
     method: req.method,
     headers: req.headers
@@ -59,6 +59,6 @@ const server = http.createServer((req, res) => {
   req.pipe(proxyReq, { end: true });
 });
 
-server.listen(PORT, () => {
-  console.log(`MCP Gateway Proxy listening on port ${PORT} -> supergateway :${SG_PORT}`);
+server.listen(PUBLIC_PORT, () => {
+  console.log(`MCP Gateway Proxy listening on port ${PUBLIC_PORT} -> supergateway :${INTERNAL_PORT}`);
 });
