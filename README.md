@@ -7,7 +7,7 @@ A monorepo hosting multiple [MCP (Model Context Protocol)](https://modelcontextp
 | Service | Source | Description | Endpoint |
 |---------|--------|-------------|----------|
 | **brave-search** | [@modelcontextprotocol/server-brave-search](https://www.npmjs.com/package/@modelcontextprotocol/server-brave-search) | Web search via Brave Search API | `https://<service>.railway.app/mcp` |
-| **firecrawl** | [firecrawl-mcp](https://www.npmjs.com/package/firecrawl-mcp) | Web scraping, crawling, and content extraction via Firecrawl | `https://<service>.railway.app/mcp` |
+| **crawl4ai** | [crawl4ai](https://pypi.org/project/crawl4ai/) | Open-source LLM-optimized web crawler & Playwright scraper | `https://<service>.railway.app/mcp` |
 | **google-maps** | [@modelcontextprotocol/server-google-maps](https://www.npmjs.com/package/@modelcontextprotocol/server-google-maps) | Location search, directions, and place details via Google Maps API | `https://<service>.railway.app/mcp` |
 | **grubhub** | [aserper/grubhub-mcp](https://github.com/aserper/grubhub-mcp) | Search restaurants, browse menus, manage cart, place orders | `https://<service>.railway.app/mcp` |
 | **puppeteer** | [@modelcontextprotocol/server-puppeteer](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) | Browser automation using headless Chromium | `https://<service>.railway.app/mcp` |
@@ -26,7 +26,7 @@ Each service is a Docker container that:
 │  Supergateway (HTTP :$PORT)                 │
 │       │                                     │
 │       └── stdio ──▶ MCP Server              │
-│                     (brave-search/firecrawl/│
+│                     (brave-search/crawl4ai/ │
 │                      google-maps/grubhub/   │
 │                      puppeteer)             │
 │                                             │
@@ -50,7 +50,7 @@ cp .env.example .env
 | Service | Variable | Required | Description |
 |---------|----------|----------|-------------|
 | brave-search | `BRAVE_API_KEY` | ✅ | Get from [brave.com/developers](https://search.brave.com/developers) |
-| firecrawl | `FIRECRAWL_API_KEY` | ✅ | Get from [firecrawl.dev](https://firecrawl.dev) |
+| crawl4ai | *(none)* | — | Open-source, runs Playwright locally out-of-the-box |
 | google-maps | `GOOGLE_MAPS_API_KEY` | ✅ | Get from [console.cloud.google.com](https://console.cloud.google.com) |
 | grubhub | `GRUBHUB_EMAIL` | ⚠️ | Required for account access, cart & ordering |
 | grubhub | `GRUBHUB_PASSWORD` | ⚠️ | Required for account access, cart & ordering |
@@ -62,7 +62,7 @@ cp .env.example .env
 2. Connect this GitHub repo
 3. Add services pointing to their subdirectories:
    - `brave-search/` → service name: `brave-search`
-   - `firecrawl/` → service name: `firecrawl`
+   - `crawl4ai/` → service name: `crawl4ai`
    - `google-maps/` → service name: `google-maps`
    - `grubhub/` → service name: `grubhub`
    - `puppeteer/` → service name: `puppeteer`
@@ -79,8 +79,8 @@ Use the Railway-assigned URLs in your MCP client config:
     "brave-search": {
       "url": "https://brave-search-production-e850.up.railway.app/mcp"
     },
-    "firecrawl": {
-      "url": "https://firecrawl-production-96b2.up.railway.app/mcp"
+    "crawl4ai": {
+      "url": "https://crawl4ai-production.up.railway.app/mcp"
     },
     "google-maps": {
       "url": "https://google-maps-production-4cff.up.railway.app/mcp"
