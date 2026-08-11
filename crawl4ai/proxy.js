@@ -7,11 +7,12 @@ const SG_PORT = 8081;
 const command = process.argv.slice(2).join(' ');
 console.log(`Starting Supergateway on internal port ${SG_PORT}...`);
 
-const sg = spawn('supergateway', [
+const sg = spawn('npx', [
+  '-y', 'supergateway',
   '--port', String(SG_PORT),
   '--cors',
   '--outputTransport', 'streamableHttp',
-  '--stdio', `"${command}"`
+  '--stdio', `${command}`
 ], {
   stdio: 'inherit',
   shell: true
