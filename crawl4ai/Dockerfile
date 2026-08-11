@@ -34,9 +34,10 @@ RUN pip install --no-cache-dir "mcp>=1.2.0" "fastmcp>=0.1.0" crawl4ai playwright
 
 WORKDIR /app
 COPY server.py .
+COPY proxy.js .
 
 ENV PORT=8080
 EXPOSE ${PORT}
 
-# Supergateway exposes Streamable HTTP with CORS at /mcp for Google Spark
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "python3 server.py"
+# Proxy wraps supergateway and normalizes Accept headers for Google Spark compatibility
+CMD ["node", "proxy.js", "python3 server.py"]

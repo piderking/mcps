@@ -13,10 +13,13 @@ RUN npm install -g supergateway
 # Install mcp, fastmcp, and grubhub-mcp from PyPI
 RUN pip install --no-cache-dir "mcp>=1.2.0" "fastmcp>=0.1.0" grubhub-mcp
 
+WORKDIR /app
+COPY proxy.js .
+
 # Railway injects PORT automatically
 ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway exposes Streamable HTTP with CORS at /mcp for Google Spark
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "grubhub"
+# Proxy wraps supergateway and normalizes Accept headers for Google Spark compatibility
+CMD ["node", "proxy.js", "grubhub"]

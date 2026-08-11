@@ -15,10 +15,13 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 # Install supergateway and the Puppeteer MCP server globally
 RUN npm install -g supergateway @modelcontextprotocol/server-puppeteer
 
+WORKDIR /app
+COPY proxy.js .
+
 # Railway injects PORT automatically
 ENV PORT=8080
 
 EXPOSE ${PORT}
 
-# Supergateway exposes Streamable HTTP with CORS at /mcp for Google Spark
-CMD supergateway --port ${PORT} --cors --outputTransport streamableHttp --stdio "mcp-server-puppeteer"
+# Proxy wraps supergateway and normalizes Accept headers for Google Spark compatibility
+CMD ["node", "proxy.js", "mcp-server-puppeteer"]
