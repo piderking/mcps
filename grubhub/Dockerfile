@@ -10,8 +10,8 @@ RUN apt-get update && \
 # Install supergateway globally
 RUN npm install -g supergateway
 
-# Install grubhub-mcp from PyPI
-RUN pip install --no-cache-dir grubhub-mcp
+# Install mcp and grubhub-mcp from PyPI
+RUN pip install --no-cache-dir "mcp[cli]" grubhub-mcp
 
 # Railway injects PORT automatically
 ENV PORT=8080
