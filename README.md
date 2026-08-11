@@ -76,7 +76,7 @@ Use the Railway-assigned URLs in your MCP client config:
       "url": "https://brave-search-production-e850.up.railway.app/mcp"
     },
     "firecrawl": {
-      "url": "https://firecrawl-production.up.railway.app/mcp"
+      "url": "https://firecrawl-production-96b2.up.railway.app/mcp"
     },
     "grubhub": {
       "url": "https://grubhub-production.up.railway.app/mcp"
