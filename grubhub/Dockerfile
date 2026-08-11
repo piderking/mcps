@@ -10,8 +10,8 @@ RUN apt-get update && \
 # Install supergateway globally
 RUN npm install -g supergateway
 
-# Install mcp, fastmcp, and grubhub-mcp from PyPI
-RUN pip install --no-cache-dir "mcp>=1.2.0" "fastmcp>=0.1.0" grubhub-mcp
+# Install mcp (1.x branch for mcp.server.fastmcp compatibility) and grubhub-mcp
+RUN pip install --no-cache-dir "mcp>=1.2.0,<2.0.0" "fastmcp>=0.1.0" grubhub-mcp
 
 WORKDIR /app
 COPY proxy.js .

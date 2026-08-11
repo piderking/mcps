@@ -28,8 +28,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
 # Install supergateway globally
 RUN npm install -g supergateway
 
-# Install crawl4ai, mcp, fastmcp, and playwright
-RUN pip install --no-cache-dir "mcp>=1.2.0" "fastmcp>=0.1.0" crawl4ai playwright && \
+# Install mcp (1.x branch for mcp.server.fastmcp compatibility), crawl4ai, and playwright
+RUN pip install --no-cache-dir "mcp>=1.2.0,<2.0.0" "fastmcp>=0.1.0" crawl4ai playwright && \
     playwright install --with-deps chromium || playwright install chromium
 
 WORKDIR /app
